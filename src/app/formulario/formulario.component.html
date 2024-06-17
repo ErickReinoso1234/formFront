@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <div class="card shadow-sm w-50 mx-auto">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Formulario de Registro</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="form-group mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input id="nombre" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre" />
+          <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="text-danger mt-1">
+            El nombre es requerido.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="apellido" class="form-label">Apellido:</label>
+          <input id="apellido" formControlName="apellido" class="form-control" placeholder="Ingresa tu apellido" />
+          <div *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched" class="text-danger mt-1">
+            El apellido es requerido.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input id="correo" formControlName="correo" class="form-control" placeholder="Ingresa tu correo electrónico" />
+          <div *ngIf="formulario.get('correo')?.invalid && formulario.get('correo')?.touched" class="text-danger mt-1">
+            <div *ngIf="formulario.get('correo')?.errors?.['required']">El correo es requerido.</div>
+            <div *ngIf="formulario.get('correo')?.errors?.['email']">El correo no es válido.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="cedula" class="form-label">Cédula:</label>
+          <input id="cedula" formControlName="cedula" class="form-control" placeholder="Ingresa tu cédula" />
+          <div *ngIf="formulario.get('cedula')?.invalid && formulario.get('cedula')?.touched" class="text-danger mt-1">
+            La cédula es requerida.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100" [disabled]="formulario.invalid">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <hr />
+
+  <div *ngFor="let formulario of formularios" class="mt-4">
+    <div class="d-flex justify-content-between align-items-center p-3 border rounded shadow-sm">
+      <div>
+        <p>Nombre:{{ formulario.nombre }}</p>
+        <p>Apellido:{{ formulario.apellido }}</p>
+        <p>Correo electrónico:{{ formulario.correo }} </p>
+        <p>Cedula: {{ formulario.cedula }}</p>
+      </div>
+      <div>
+        <button class="btn btn-outline-primary btn-sm me-2" (click)="getFormulario(formulario.id)">Actualizar</button>
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteFormulario(formulario.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

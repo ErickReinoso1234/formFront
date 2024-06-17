@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+.bg-custom-dark-blue {
+    background-color: #273c75; /* Cambia este valor al azul oscuro deseado */
+ }
