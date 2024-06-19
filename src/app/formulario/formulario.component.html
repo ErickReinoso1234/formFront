@@ -9,7 +9,9 @@
           <label for="nombre" class="form-label">Nombre:</label>
           <input id="nombre" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre" />
           <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="text-danger mt-1">
-            El nombre es requerido.
+            <div *ngIf="formulario.get('nombre')?.errors?.['required']">El nombre es requerido.</div>
+            <div *ngIf="formulario.get('nombre')?.errors?.['pattern']">Nombre solo puede contener letras.</div>
+            <span class="bi bi-exclamation-triangle-fill"></span> 
           </div>
         </div>
 
@@ -18,6 +20,8 @@
           <input id="apellido" formControlName="apellido" class="form-control" placeholder="Ingresa tu apellido" />
           <div *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched" class="text-danger mt-1">
             El apellido es requerido.
+          <div *ngIf="formulario.get('apellido')?.errors?.['pattern']">El apellido solo puede contener letras.</div>
+            <span class="bi bi-exclamation-triangle-fill"></span> 
           </div>
         </div>
 
@@ -27,6 +31,7 @@
           <div *ngIf="formulario.get('correo')?.invalid && formulario.get('correo')?.touched" class="text-danger mt-1">
             <div *ngIf="formulario.get('correo')?.errors?.['required']">El correo es requerido.</div>
             <div *ngIf="formulario.get('correo')?.errors?.['email']">El correo no es válido.</div>
+            <span class="bi bi-exclamation-triangle-fill"></span> 
           </div>
         </div>
 
@@ -34,7 +39,8 @@
           <label for="cedula" class="form-label">Cédula:</label>
           <input id="cedula" formControlName="cedula" class="form-control" placeholder="Ingresa tu cédula" />
           <div *ngIf="formulario.get('cedula')?.invalid && formulario.get('cedula')?.touched" class="text-danger mt-1">
-            La cédula es requerida.
+            La cédula debe de tener solo numeros
+            <span class="bi bi-exclamation-triangle-fill"></span>
           </div>
         </div>
 

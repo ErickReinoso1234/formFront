@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormularioService } from '../formulario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -66,11 +67,19 @@ export class FormularioComponent implements OnInit {
     this.formularioService.create(this.formulario.value).subscribe(
       data => {
         console.log('Formulario creado:', data);
-        this.getFormularios(); // Actualiza la lista de formularios
+        this.getFormularios(); 
+         // Actualiza la lista de formularios
         this.formulario.reset();
       },
       error => {
         console.error('Error al crear el formulario:', error);
+        if (error.error && error.error.message) {
+          // Si hay un mensaje de error en la respuesta del servidor, mostrarlo al usuario
+          alert(error.error.message);
+        } else {
+          // Si no hay un mensaje de error específico, mostrar un mensaje genérico
+          alert('Ocurrió un error al crear el formulario. Por favor, intenta nuevamente.');
+        }
       }
     );
   }
